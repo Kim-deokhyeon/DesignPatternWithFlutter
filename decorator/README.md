@@ -29,14 +29,14 @@
  - [ ] 대상이 될 클래스를 찾는다.  
  - 꾸밈 코드를 가지고 있는 클래스를 찾는다.  
  - 허나 꾸밈코드가 있다고 해서 무조건 Refactoring 할 필요는 없다.
- <br>
+ 
  - [ ]  public 메서드의 수를 확인한다. 
  - Decorator는 결국 `투명한 외투`의 역할임
  Why❓ 동일한 인터페이스로 호스트와 Decorator를 조작해야 하기 때문 
   - 직접 선언되거나 상속받은 public 메서드가 많다면, 적절한 작업으로 수를 줄이거나 혹은 **Strategy Pattern**과 같은 대안을 고려해야 한다.
   <br><br>
 
-1. 인클로저 타입 ^enclosure^ ^type^을 찾거나 새로 만든다. 
+1. 인클로저 타입 <sup>enclosure type</sup>을 찾거나 새로 만든다. 
  - 인클로저 타입 : Decorator 클래스와 호스트 클래스 모두의 Super 타입이 될 존재
  - 적당한 후보가 없다면 **Unify Interfaces** 혹은 **Extract Interface Pattern**을 통해 새로 만들어야 한다.  
 2. 호스트 클래스에서 꾸밈 코드에 해당하는 조건 로직을 찾아서 **Replace Conditional with Polymorphism** 리팩터링을 통해 제거한다.  
@@ -50,7 +50,7 @@
     
 3.  **Replace Inheritance with Delegation** 리팩터링을 통해 서브 클래스들을 위임 클래스^delegating^ ^class^로 변환한다.  
  - 위임 클래스는 모두 인클로저 타입을 구현하도록 한다.
- - 위임 클래스의 대리 객체^delegate^ 필드도 인클로저 타입으로 한다.
+ - 위임 클래스의 대리 객체<sup>delegate</sup> 필드도 인클로저 타입으로 한다.
  - 꾸밈 코드를 위임 클래스가 위임 메서드를 호출하기 전에 실행할 것인지 아니면 그 후에 실행할 것인지를 결정한다.
 
 > 앞 단계에서 **Form Template Method** 리팩터링을 적용했다면 위임 클래스에서 public이 아닌 메서드를 호출할 수도 있다. 
