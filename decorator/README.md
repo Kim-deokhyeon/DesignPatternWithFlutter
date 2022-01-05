@@ -1,16 +1,64 @@
-# decorator
+# Decorator 패턴  
+  
 
-A new Flutter project.
+>**어떤 메소드의 내부 로직이 한 눈에 이해하기 어렵다면 그 로직을 의도가 잘 드러나며 동등한 수준의 작업을 하는 여러 단계로 나눈다.**  
+  
 
-## Getting Started
+## 동기  
+  
+새 기능을 추가해야 할 때, 보통은 기존 클래스에 코드를 덧붙인다.
+이렇게 추가 된 기능은 핵심 기능 혹은 주된 행동에 대해 `꾸밈 코드`로써 동작하는 경우가 많다.
+새로운 필드 또는 메서드, 로직이 추가되고 호스트 클래스가 복잡해진다.
+새로 추가된 기능은 대개 특정 조건에서만 사용된다.
+**Decorator Method**는 꾸밈 코드를 각자의 클래스로 옮겨서 그 객체가 호스트 객체를 감싸도록 만드는 것이다.
+  
 
-This project is a starting point for a Flutter application.
+## 장점과 단점  
+  
 
-A few resources to get you started if this is your first Flutter project:
+| 장점                                                    | 단점                                                                  |
+| ------------------------------------------------------- | --------------------------------------------------------------------- |
+| 꾸밈 코드를 제거해 호스트 클래스를 단순하게 만든다.     | 클라이언트의 입장에서는 대상 객체의 타입이 바뀐다.                    |
+| 클래스의 핵심 기능과 부가 기능을 손쉽게 구별할 수 있다. | 코드를 이해하고 디버깅하기 더 어려워질 수도 있다.                     |
+| 관련된 클래스에서 중복된 꾸밈 코드를 줄일 수 있다.      | 조합 방식이 서로에게 영향을 끼친다면, 설계를 더 복잡하게 하여야 한다. |
+  
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## 절차  
+  
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ - [ ] 대상이 될 클래스를 찾는다.  
+ - 꾸밈 코드를 가지고 있는 클래스를 찾는다.  
+ - 허나 꾸밈코드가 있다고 해서 무조건 Refactoring 할 필요는 없다.
+ <br>
+ - [ ]  public 메서드의 수를 확인한다. 
+ - Decorator는 결국 `투명한 외투`의 역할임
+ Why❓ 동일한 인터페이스로 호스트와 Decorator를 조작해야 하기 때문 
+  - 직접 선언되거나 상속받은 public 메서드가 많다면, 적절한 작업으로 수를 줄이거나 혹은 **Strategy Pattern**과 같은 대안을 고려해야 한다.
+  <br><br>
+
+1. 인클로저 타입 ^enclosure^ ^type^을 찾거나 새로 만든다. 
+ - 인클로저 타입 : Decorator 클래스와 호스트 클래스 모두의 Super 타입이 될 존재
+ - 적당한 후보가 없다면 **Unify Interfaces** 혹은 **Extract Interface Pattern**을 통해 새로 만들어야 한다.  
+2. 호스트 클래스에서 꾸밈 코드에 해당하는 조건 로직을 찾아서 **Replace Conditional with Polymorphism** 리팩터링을 통해 제거한다.  
+ - **Replace Conditional with Polymorphism**
+ -> 각 조건의 내용을 서브 클래스의 메소드로 @override 하도록 옮기고,
+호스트 메소드는 abstract로 변경.
+
+ - 적절한 상속 구조를 위해 **Replace Type Code with Subclasses** 혹은 **Replace Type Code with State/Strategy**를 사용하게 될 것임
+ - Return Type이 앞 단계의 인클로저 Type과 동일해야 함
+ - 꾸밈 코드 앞이나 뒤로 실행할 로직이 있다면 **Replace Conditional with Polymorphism**과 함께 **Form Template Method**를 사용할 수 있다.
+    
+3.  **Replace Inheritance with Delegation** 리팩터링을 통해 서브 클래스들을 위임 클래스^delegating^ ^class^로 변환한다.  
+ - 위임 클래스는 모두 인클로저 타입을 구현하도록 한다.
+ - 위임 클래스의 대리 객체^delegate^ 필드도 인클로저 타입으로 한다.
+ - 꾸밈 코드를 위임 클래스가 위임 메서드를 호출하기 전에 실행할 것인지 아니면 그 후에 실행할 것인지를 결정한다.
+
+> 앞 단계에서 **Form Template Method** 리팩터링을 적용했다면 위임 클래스에서 public이 아닌 메서드를 호출할 수도 있다. 
+> 그 경우 해당 메서드를 public으로 변경 후 **Unify Interfaces** 리팩터링을 다시 적용해본다.
+
+
+  
+4.  각 위임 클래스의 대리 객체 필드에 호스트 클래스의 새 인스턴스를 만들어 대입한다.  
+ - 대입문은 위임 클래스의 생성자에 위치해야 한다.  
+ - 호스트 클래스의 인스턴스를 생성하는 코드에 **Extract Parameter**를 적용해 파라미터로 뽑아낸다.
+ - 생성자의 파라미터 중 불필요한 것이 있다면 **Remove Parameter** 리팩터링을 이용해 제거한다.  
