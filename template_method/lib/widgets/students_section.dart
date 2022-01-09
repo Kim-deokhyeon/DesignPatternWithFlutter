@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:template_method/student.dart';
 
 import '../../../constants/constants.dart';
 import '../template_method.dart';
@@ -13,7 +12,8 @@ class StudentsSection extends StatefulWidget {
   const StudentsSection({
     required this.bmiCalculator,
     required this.headerText,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   _StudentsSectionState createState() => _StudentsSectionState();

@@ -8,7 +8,8 @@ class StudentsDataTable extends StatelessWidget {
 
   const StudentsDataTable({
     required this.students,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

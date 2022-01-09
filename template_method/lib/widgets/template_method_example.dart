@@ -6,7 +6,9 @@ import '../template_method.dart';
 import 'students_section.dart';
 
 class TemplateMethodExample extends StatelessWidget {
-  const TemplateMethodExample();
+  const TemplateMethodExample({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
