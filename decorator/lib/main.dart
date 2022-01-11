@@ -8,7 +8,7 @@ void main() {
 
   print(pizza1.getDescription());
 
-  Pizza pizza2 = PizzaBase('pizza1');
+  Pizza pizza2 = PizzaBase('pizza2');
   pizza2 = Sauce(pizza2);
   pizza2 = Mozzarella(pizza2);
   pizza2 = Basil(pizza2);
