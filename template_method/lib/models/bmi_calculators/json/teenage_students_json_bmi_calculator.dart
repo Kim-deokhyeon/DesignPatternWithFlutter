@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:meta/meta.dart';
 
-import '../../apis/json_students_api.dart';
+import '../../../apis/json_students_api.dart';
 import '../../student.dart';
 import '../../students_bmi_calculator.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../models/template_method.dart';
 import '../../../constants/constants.dart';
-import '../template_method.dart';
 import 'platform_button.dart';
 import 'students_data_table.dart';
 

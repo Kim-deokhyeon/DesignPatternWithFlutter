@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template_method/student.dart';
+import '../models/template_method.dart';
 
 import '../../../constants/constants.dart';
 

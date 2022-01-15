@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:template_method/constants/constants.dart';
 import 'package:template_method/constants/layout_constants.dart';
 
-import '../template_method.dart';
+import '../models/template_method.dart';
 import 'students_section.dart';
 
 class TemplateMethodExample extends StatelessWidget {

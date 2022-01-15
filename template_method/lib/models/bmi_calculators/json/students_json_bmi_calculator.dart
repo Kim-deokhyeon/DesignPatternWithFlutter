@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../apis/json_students_api.dart';
+import '../../../apis/json_students_api.dart';
 import '../../student.dart';
 import '../../students_bmi_calculator.dart';
 

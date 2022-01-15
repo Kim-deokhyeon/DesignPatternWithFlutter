@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
-import 'package:template_method/template_method.dart';
 import 'package:xml/xml.dart';
+
+import '../../../models/template_method.dart';
 
 class StudentsXmlBmiCalculator extends StudentsBmiCalculator {
   final XmlStudentsApi _api = XmlStudentsApi();
